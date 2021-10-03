@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'udemy',
     'courses',
     'cart',
+    'assessments',
+    'library',
 ]
 
 MIDDLEWARE = [
