@@ -23,11 +23,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'accounts',
-    'udemy',
+    'home',
     'courses',
     'cart',
     'assessments',
     'library',
+    'finances',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +42,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-ROOT_URLCONF = 'udemyclone.urls'
+ROOT_URLCONF = '_elms_core.urls'
 
 TEMPLATES = [
     {
@@ -62,7 +63,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'udemyclone.wsgi.application'
+WSGI_APPLICATION = '_elms_core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -111,7 +112,7 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-ALLOWED_HOSTS = ['django-udemy-clone.herokuapp.com', 'localhost', '*']
+ALLOWED_HOSTS = ['django-home-clone.herokuapp.com', 'localhost', '*']
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -125,3 +126,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = 'accounts.User'
 
 CART_SESSION_SLUG = 'cart'
+
+# RAVE / FLUTTERWAVE DETAILS
+usingEnv = False  ## TODO turnit off in the Production
+RAVE_PUBLIC_KEY = "YOUR_PUBLIC_KEY"
+RAVE_SECRET_KEY = "YOUR_SECRET_KEY",
+RAVE_EXECUTION_ENV = usingEnv

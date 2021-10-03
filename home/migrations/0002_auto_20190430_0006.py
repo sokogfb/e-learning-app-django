@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('udemy', '0001_initial'),
+        ('home', '0001_initial'),
     ]
 
     operations = [

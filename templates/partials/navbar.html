@@ -18,7 +18,7 @@
 
                     {% include 'partials/menu.html' %}
 
-                    <form class="inline-form" action="{% url 'udemy:search' %}" method="get" style="width: 100%;">
+                    <form class="inline-form" action="{% url 'home:search' %}" method="get" style="width: 100%;">
                         <div class="input-group search-box mobile-search">
                             <input type="text" name='q' class="form-control"
                                    placeholder="Search for courses">
@@ -31,10 +31,11 @@
                     <div class="wishlist-box menu-icon-box" id="wishlist_items">
                         {#                        Wishlist will be here#}
                     </div>
-
-                    <div class="cart-box menu-icon-box" id="cart_items">
-                        {% include 'partials/cart.html' %}
-                    </div>
+                    {% if request.user.is_authenticated %}
+                        <div class="cart-box menu-icon-box" id="cart_items">
+                            {% include 'partials/cart.html' %}
+                        </div>
+                    {% endif %}
 
                     {% if request.user.is_authenticated %}
                         <div class="user-box menu-icon-box">
@@ -93,7 +94,7 @@
 
                             <a href="{% url 'accounts:login' %}" class="btn btn-sign-in">Login</a>
 
-                            <a href="{% url 'accounts:register' %}" class="btn btn-sign-up">Sign up</a>
+                            <a href="{% url 'accounts:register' %}" class="btn btn-sign-up">Register</a>
 
                         </div>
                     {% endif %}
