@@ -23,7 +23,7 @@ class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     slug = models.SlugField(max_length=200, unique=True, primary_key=True, auto_created=False)
-    short_description = models.TextField(blank=False, max_length=60)
+    short_description = models.TextField(blank=False, max_length=3000)
     description = models.TextField(blank=False)
     outcome = models.CharField(max_length=200)
     requirements = models.CharField(max_length=200)

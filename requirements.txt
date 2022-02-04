@@ -29,3 +29,6 @@ webencodings==0.5.1
 whitenoise==5.2.0
 rave_python
 djangify
+psycopg2
+whitenoise
+wheel

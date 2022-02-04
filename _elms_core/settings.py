@@ -11,7 +11,11 @@ SECRET_KEY = '83e21k1f8kjn1a2=$x5i=7$=x0@!_c$54xxu^^n(u)3j_js-(k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# ADMINS
 
+ADMIN = [
+    ('Gift Soko', 'senzangakhona.inc@gmail.com'),
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,7 +59,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # custom
                 'courses.context_processors.categories_processor',
                 'cart.context_processors.cart',
             ],
@@ -67,11 +70,19 @@ WSGI_APPLICATION = '_elms_core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+# elearning_app_postgres_db
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+    ,
+    'backup': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'elearning_app_postgres_db',
+        'USERNAME': 'postgres',
+        'PASSWORD': 'postgres',
+        'PORT': 5432,
     }
 }
 
@@ -132,3 +143,13 @@ usingEnv = False  ## TODO turnit off in the Production
 RAVE_PUBLIC_KEY = "YOUR_PUBLIC_KEY"
 RAVE_SECRET_KEY = "YOUR_SECRET_KEY",
 RAVE_EXECUTION_ENV = usingEnv
+
+# Email/SMTP Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'smartlearninglms@gmail.com'
+EMAIL_HOST_PASSWORD = 'mgic#zambia@zmphia2020'
+DEFAULT_FROM_EMAIL = 'smartlearninglms@gmail.com'

@@ -4,16 +4,14 @@
     <div class="container-xl">
         <div class="row">
             <div class="col">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="navbar navbar-expand-lg navbar-light bg-light">
 
                     <ul class="mobile-header-buttons">
                         <li><a class="mobile-nav-trigger" href="#mobile-primary-nav">Menu<span></span></a></li>
                         <li><a class="mobile-search-trigger" href="#mobile-search">Search<span></span></a></li>
                     </ul>
-
                     <a class="navbar-brand" href="/">
-                        {#                        {{ --<img src="" alt="" height="30">--}}#}
-                        Udemy Clone
+                        <img src="{% static 'images/logo.png' %}" height="100" alt="my image">
                     </a>
 
                     {% include 'partials/menu.html' %}
@@ -74,6 +72,11 @@
                                     </li>
                                     <li class="user-dropdown-menu-item">
                                         <a href="">
+                                            <i class="far fa-gem"></i>Assignments
+                                        </a>
+                                    </li>
+                                    <li class="user-dropdown-menu-item">
+                                        <a href="">
                                             <i class="far fa-heart"></i>My Wishlist
                                         </a>
                                     </li>
@@ -91,15 +94,12 @@
                     {% else %}
                         <span class="signin-box-move-desktop-helper"></span>
                         <div class="sign-in-box btn-group">
-
                             <a href="{% url 'accounts:login' %}" class="btn btn-sign-in">Login</a>
-
-                            <a href="{% url 'accounts:register' %}" class="btn btn-sign-up">Register</a>
-
+                            <a href="{% url 'accounts:register' %}" class="btn btn-sign-up">Sign Up</a>
                         </div>
                     {% endif %}
-                </nav>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
 </section>
