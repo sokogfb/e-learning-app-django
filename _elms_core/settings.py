@@ -148,8 +148,11 @@ RAVE_EXECUTION_ENV = usingEnv
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+# Email Config
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'smartlearninglms@gmail.com'
-EMAIL_HOST_PASSWORD = 'mgic#zambia@zmphia2020'
-DEFAULT_FROM_EMAIL = 'smartlearninglms@gmail.com'
+EMAIL_HOST_USER = 'soxcode86@gmail.com'
+EMAIL_HOST_PASSWORD = 'mgic#zambia@2019-2020'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'soxcode86@gmail.com'
