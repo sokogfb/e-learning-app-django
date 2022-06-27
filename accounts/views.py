@@ -89,8 +89,9 @@ class LogoutView(RedirectView):
 
 
 class EnrolledCoursesListView(ListView):
+    paginate_by = 6
     model = Enroll
-    template_name = 'courses/enrolled_courses.html'
+    template_name = 'lms/enrolled_courses.html'
     context_object_name = 'enrolls'
 
     @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
@@ -104,6 +105,7 @@ class EnrolledCoursesListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
+        context['recent_courses'] = Course.objects.all().order_by('-created_at')[:3]
         return context
 
 

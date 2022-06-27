@@ -123,7 +123,7 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-ALLOWED_HOSTS = ['django-home-clone.herokuapp.com', 'localhost', '*']
+ALLOWED_HOSTS = ['localhost', '*']
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -156,3 +156,14 @@ EMAIL_HOST_USER = 'soxcode86@gmail.com'
 EMAIL_HOST_PASSWORD = 'mgic#zambia@2019-2020'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'soxcode86@gmail.com'
+
+# Twilio SMS API Settings TODO
+SENDSMS_BACKEND = 'myapp.mysmsbackend.SmsBackend'
+SENDSMS_ACCOUNT_ID = 'ACdf97b6f4c47e9e1e64437a707e46e44b'
+SENDSMS_AUTH_TOKEN = 'ab5664bc324ed669efc42a6385c48076'
+SENDSMS_FROM = '+19804003288'
+
+# Flutterwave API Test Settings TODO
+RAVE_PUBLIC_KEY = 'FLWPUBK_TEST-736ff2d5a478597130af0d1c28427197-X'
+RAVE_SECRET_KEY = 'FLWSECK_TEST-3627ec610dc78c5f9e3dcaf0104ad79e-X'
+RAVE_ENCRYPTION_KEY = 'FLWSECK_TEST1139818b1358'

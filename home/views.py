@@ -18,7 +18,7 @@ def index(request):
 
 class HomeListView(ListView):
     model = Course
-    template_name = 'index.html'
+    template_name = 'lms/index.html'
     context_object_name = 'courses'
 
     def get_context_data(self, **kwargs):

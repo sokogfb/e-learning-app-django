@@ -1,5 +1,4 @@
 from django.http import Http404
-from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
 from cart.cart import Cart
@@ -9,7 +8,7 @@ from home.models import Enroll
 
 class CourseDetailView(DetailView):
     model = Course
-    template_name = 'courses/details.html'
+    template_name = 'lms/courses-details.html'
     context_object_name = 'course'
 
     def get_object(self, queryset=None):
@@ -43,8 +42,9 @@ class CourseDetailView(DetailView):
 
 
 class CoursesByCategoryListView(ListView):
+    paginate_by = 6
     model = Course
-    template_name = 'courses/courses_by_category.html'
+    template_name = 'lms/courses.html'
     context_object_name = 'courses'
 
     def get_queryset(self):
@@ -56,4 +56,5 @@ class CoursesByCategoryListView(ListView):
         category = Category.objects.get(slug=self.kwargs['slug'])
         context['category'] = category
         context['categories'] = Category.objects.all()
+        context['recent_courses'] = Course.objects.all().order_by('-created_at')[:3]
         return context
