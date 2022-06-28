@@ -56,6 +56,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, related_name='lessons')
     title = models.CharField(max_length=100)
     duration = models.FloatField(validators=[MinValueValidator(0.30), MaxValueValidator(30.00)])
+    content = models.TextField(verbose_name='Lesson Content', default='Demo Text')
     video_url = models.CharField(max_length=100)
     document = models.FileField(upload_to='courses/lessons/documents')
     created_at = models.DateTimeField(default=now)

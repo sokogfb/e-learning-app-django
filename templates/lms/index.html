@@ -61,20 +61,19 @@
                         <ul>
                             <li><a href=" {% static 'faq-1.html' %} "><i class="fa fa-question-circle"></i>Ask a
                                 Question</a></li>
-                            <li><a href=" {% static 'javascript:;' %} "><i class="fa fa-envelope-o"></i>Support@website.com</a>
+                            <li><a href=" {% static 'javascript:;' %} "><i class="fa fa-envelope-o"></i>support@educhamp.co.zm</a>
                             </li>
                         </ul>
                     </div>
                     <div class="topbar-right">
                         <ul>
-                            <li>
-                                <select class="header-lang-bx">
-                                    <option data-icon="flag flag-uk">English UK</option>
-                                    <option data-icon="flag flag-us">English US</option>
-                                </select>
-                            </li>
-                            <li><a href=" {% url 'accounts:login' %} ">Login</a></li>
-                            <li><a href=" {% url 'accounts:register' %} ">Register</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'accounts:my-profile' %}">{{ request.user.first_name }}</a></li>
+                                <li><a href="{% url 'accounts:enrolled-courses' %}">My Courses</a></li>
+                            {% else %}
+                                <li><a href=" {% url 'accounts:login' %} ">Login</a></li>
+                                <li><a href=" {% url 'accounts:register' %} ">Register</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -85,8 +84,9 @@
                 <div class="container clearfix">
                     <!-- Header Logo ==== -->
                     <div class="menu-logo">
-                        <a href=" {% url 'home:home' %} "><img src=" {% static 'assets/images/logo-white.png' %} "
-                                                               alt=""></a>
+                        <a href=" {% url 'home:home' %} ">
+                            <img src="{% static 'assets/images/logo-white.png' %}" alt="">
+                        </a>
                     </div>
                     <!-- Mobile Nav Button ==== -->
                     <button class="navbar-toggler collapsed menuicon justify-content-end" type="button"
@@ -109,7 +109,8 @@
                                 <!-- Search Button ==== -->
                                 <li class="search-btn">
                                     <button id="quik-search-btn" type="button" class="btn-link"><i
-                                            class="fa fa-search"></i></button>
+                                            class="fa fa-search"></i>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -125,17 +126,11 @@
                     <!-- Navigation Menu ==== -->
                     <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
                         <div class="menu-logo">
-                            <a href=" {% static 'index.html' %} "><img src=" {% static 'assets/images/logo.png' %} "
-                                                                       alt=""></a>
+                            <a href="{% url 'home:home' %}"><img src=" {% static 'assets/images/logo.png' %} "
+                                                                 alt=""></a>
                         </div>
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href=" {% url 'home:home' %} ">Home <i
-                                    class="fa fa-chevron-down"></i></a>
-                                <ul class="sub-menu">
-                                    <li><a href=" {% static 'index.html' %} ">Home 1</a></li>
-                                    <li><a href=" {% static 'index-2.html' %} ">Home 2</a></li>
-                                </ul>
-                            </li>
+                            <li class="active"><a href=" {% url 'home:home' %} ">Home</a></li>
                             <li><a href=" {% static 'javascript:;' %} ">Pages <i class="fa fa-chevron-down"></i></a>
                                 <ul class="sub-menu">
                                     <li><a href=" {% static 'javascript:;' %} ">About<i
@@ -653,10 +648,13 @@
                                         <div class="cours-bx">
                                             <div class="action-box">
                                                 <img src=" {{ course.thumbnail.url }} " alt="">
-                                                <a href="{% url 'courses:course-details' course.slug %}" class="btn">Read More</a>
+                                                <a href="{% url 'courses:course-details' course.slug %}" class="btn">Read
+                                                    More</a>
                                             </div>
                                             <div class="info-bx text-center">
-                                                <h5><a href="{% url 'courses:course-details' course.slug %}">{{ course.title }}</a></h5>
+                                                <h5>
+                                                    <a href="{% url 'courses:course-details' course.slug %}">{{ course.title }}</a>
+                                                </h5>
                                                 <span>{{ course.category }}</span>
                                             </div>
                                             <div class="cours-more-info">

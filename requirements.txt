@@ -32,3 +32,4 @@ djangify
 psycopg2
 whitenoise
 wheel
+django-summernote

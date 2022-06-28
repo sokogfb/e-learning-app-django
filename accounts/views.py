@@ -1,8 +1,9 @@
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, request
 from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
+from django.template import context
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, FormView, RedirectView, ListView, DetailView, UpdateView
@@ -179,7 +180,7 @@ class LessonView(DetailView):
 
 class ProfileUpdateView(UpdateView):
     model = User
-    template_name = "accounts/profile.html"
+    template_name = "lms/profile.html"
     context_object_name = "user"
     form_class = ProfileUpdateForm
     success_url = reverse_lazy("accounts:my-profile")
