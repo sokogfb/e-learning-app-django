@@ -144,7 +144,7 @@
                                     <li><a href=" {% static 'javascript:;' %} ">Contact Us<i
                                             class="fa fa-angle-right"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href=" {% static 'contact-1.html' %} ">Contact Us 1</a></li>
+                                            <li><a href=" {% url 'home:contact' %} ">Contact Us 1</a></li>
                                             <li><a href=" {% static 'contact-2.html' %} ">Contact Us 2</a></li>
                                         </ul>
                                     </li>
@@ -419,7 +419,27 @@
                                         <div class="profile-head">
                                             <h3>Edit Profile</h3>
                                         </div>
-                                        <form class="edit-profile">
+
+                                        {% if form.errors %}
+                                            {% for field in form %}
+                                                {% for error in field.errors %}
+                                                    <div class="alert alert-danger alert-dismissable">
+                                                        <a href="#" class="close" data-dismiss="alert"
+                                                           aria-label="close">&times;</a>
+                                                        <strong>{{ error|escape }}</strong>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endfor %}
+                                            {% for error in form.non_field_errors %}
+                                                <div class="alert alert-danger alert-dismissable">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+
+                                        <form action="#" class="edit-profile" method="post">
+                                            {% csrf_token %}
                                             <div class="">
                                                 <div class="form-group row">
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-10 ml-auto">
@@ -430,21 +450,23 @@
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Full
                                                         Name</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                        <input class="form-control" type="text" value="Mark Andre">
+                                                        <input class="form-control" readonly type="text"
+                                                               value="{{ user.first_name }} {{ user.last_name }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Occupation</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                        <input class="form-control" type="text" value="CTO">
+                                                        <input class="form-control" type="text"
+                                                               value="{{ user.userprofile.occupation }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Company
                                                         Name</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                        <input class="form-control" type="text" value="EduChamp">
-                                                        <span class="help">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
+                                                        <input class="form-control" type="text"
+                                                               value="{{ user.userprofile.Institute }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -452,7 +474,7 @@
                                                         No.</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
                                                         <input class="form-control" type="text"
-                                                               value="+120 012345 6789">
+                                                               value="{{ user.userprofile.phone }}">
                                                     </div>
                                                 </div>
 
@@ -467,25 +489,28 @@
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Address</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
                                                         <input class="form-control" type="text"
-                                                               value="5-S2-20 Dummy City, UK">
+                                                               value="{{ user.userprofile.address }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">City</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                        <input class="form-control" type="text" value="US">
+                                                        <input class="form-control" type="text"
+                                                               value="{{ user.userprofile.city }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">State</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                        <input class="form-control" type="text" value="California">
+                                                        <input class="form-control" type="text"
+                                                               value="{{ user.userprofile.country.name }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Postcode</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                        <input class="form-control" type="text" value="000702">
+                                                        <input class="form-control" type="text"
+                                                               value="{{ user.userprofile.postcode }}">
                                                     </div>
                                                 </div>
 
@@ -501,27 +526,28 @@
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Linkedin</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
                                                         <input class="form-control" type="text"
-                                                               value="www.linkedin.com">
+                                                               value="{{ user.userprofile.linkedin }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Facebook</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
                                                         <input class="form-control" type="text"
-                                                               value="www.facebook.com">
+                                                               value="{{ user.userprofile.facebook }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Twitter</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                        <input class="form-control" type="text" value="www.twitter.com">
+                                                        <input class="form-control" type="text"
+                                                               value="{{ user.userprofile.twitter }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-md-3 col-lg-2 col-form-label">Instagram</label>
                                                     <div class="col-12 col-sm-9 col-md-9 col-lg-7">
                                                         <input class="form-control" type="text"
-                                                               value="www.instagram.com">
+                                                               value="{{ user.userprofile.instagram }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -531,7 +557,7 @@
                                                         <div class="col-12 col-sm-3 col-md-3 col-lg-2">
                                                         </div>
                                                         <div class="col-12 col-sm-9 col-md-9 col-lg-7">
-                                                            <button type="reset" class="btn">Save changes</button>
+                                                            <button type="submit" class="btn">Save changes</button>
                                                             <button type="reset" class="btn-secondry">Cancel</button>
                                                         </div>
                                                     </div>
@@ -647,10 +673,10 @@
                                 <div class="widget footer_widget">
                                     <h5 class="footer-title">Company</h5>
                                     <ul>
-                                        <li><a href=" {% static 'index.html' %} ">Home</a></li>
+                                        <li><a href=" {% url 'home:home' %} ">Home</a></li>
                                         <li><a href=" {% static 'about-1.html' %} ">About</a></li>
                                         <li><a href=" {% static 'faq-1.html' %} ">FAQs</a></li>
-                                        <li><a href=" {% static 'contact-1.html' %} ">Contact</a></li>
+                                        <li><a href=" {% url 'home:contact' %} ">Contact</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -716,9 +742,9 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><a target="_blank"
-                                                                              href="https://www.templateshub.net">Templates
-                        Hub</a></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                        <a target="_blank" href="https://www.educhamp.co.zm">EduChamp Zambia</a> | Powered by <a
+                            href="mailto:efficient.tech.zm@gmail.com"> Efficient Technologies</a></div>
                 </div>
             </div>
         </div>

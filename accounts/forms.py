@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import User
+from .models import User, UserProfile
 
 
 class UserLoginForm(forms.Form):
@@ -87,9 +87,19 @@ class UserRegistrationForm(UserCreationForm):
 class ProfileUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["first_name"].widget.attrs.update({'placeholder': 'Enter first name'})
-        self.fields["last_name"].widget.attrs.update({'placeholder': 'Enter last name'})
+        self.fields["title"].widget.attrs.update({'placeholder': 'Title'})
+        self.fields["phone"].widget.attrs.update({'placeholder': 'Phone'})
+        self.fields["country"].widget.attrs.update({'placeholder': 'Country'})
+        self.fields["city"].widget.attrs.update({'placeholder': 'City'})
+        self.fields["Institute"].widget.attrs.update({'placeholder': 'Institute'})
+        self.fields["occupation"].widget.attrs.update({'placeholder': 'Occupation'})
+        self.fields["profile_pic"].widget.attrs.update({'placeholder': 'Occupation'})
+        self.fields["facebook"].widget.attrs.update({'placeholder': 'Facebook'})
+        self.fields["twitter"].widget.attrs.update({'placeholder': 'Twitter'})
+        self.fields["linkedin"].widget.attrs.update({'placeholder': 'LinkedIn'})
 
     class Meta:
-        model = User
-        fields = ["first_name", "last_name"]
+        model = UserProfile
+        fields = ["title", "phone", "country", "city", "Institute", "occupation", "address", "profile_pic", "facebook",
+                  "twitter",
+                  "linkedin"]

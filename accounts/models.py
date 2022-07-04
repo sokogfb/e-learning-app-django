@@ -39,12 +39,16 @@ class UserProfile(models.Model):
     country = CountryField(blank_label='Select Country', null=True, verbose_name='Country')
     city = models.CharField(default='Lusaka', max_length=150, null=True, verbose_name='City/District/Town')
     Institute = models.CharField(max_length=200, null=True, verbose_name='Institute or Company')
+    occupation = models.CharField(max_length=200, null=True, verbose_name='Occupation')
+    address = models.CharField(max_length=200, null=True, verbose_name='Address')
+    postcode = models.CharField(max_length=200, null=True, verbose_name='Postcode')
     profile_pic = models.ImageField(upload_to="users/profiles", default="profile11.png", null=True, blank=True,
                                     verbose_name='Profile Picture')
     facebook = models.CharField(max_length=255, verbose_name='Facebook', default='https://web.facebook.com')
     twitter = models.CharField(max_length=255, verbose_name='Twitter', default='https://twitter.com/')
     linkedin = models.CharField(max_length=255, verbose_name='LinkeIn', default='https://www.linkedin.com/')
+    instagram = models.CharField(max_length=255, verbose_name='LinkeIn', default='https://www.instagram.com/')
     date_created = models.DateTimeField(auto_now_add=True, null=True, verbose_name='Date Created')
 
     def __str__(self):
-        return self.user.email
+        return self.user.last_name + " " + self.user.first_name

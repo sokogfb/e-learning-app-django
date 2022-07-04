@@ -1,23 +1,23 @@
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404, request
+from django.contrib.auth.views import PasswordResetView
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
-from django.template import context
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, FormView, RedirectView, ListView, DetailView, UpdateView
 
 from courses.models import Category, Lesson, Course
 from home.models import Enroll
-from .models import User
 from .forms import UserRegistrationForm, UserLoginForm, ProfileUpdateForm
+from .models import User
 
 
 class RegisterView(CreateView):
     model = User
     form_class = UserRegistrationForm
-    template_name = 'accounts/form.html'
+    template_name = 'lms/register.html'
     success_url = '/login'
 
     extra_context = {
@@ -43,7 +43,7 @@ class RegisterView(CreateView):
             user.save()
             return redirect('accounts:login')
         else:
-            return render(request, 'accounts/form.html', {'form': user_form})
+            return render(request, 'lms/register.html', {'form': user_form})
 
 
 class LoginView(FormView):
@@ -52,7 +52,7 @@ class LoginView(FormView):
     """
     success_url = '/'
     form_class = UserLoginForm
-    template_name = 'accounts/form.html'
+    template_name = 'lms/login.html'
 
     extra_context = {
         'title': 'Login'
@@ -201,3 +201,11 @@ class ProfileUpdateView(UpdateView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+def PasswordReset(request):
+    success_url = 'login'
+    form_class = PasswordResetView
+    template_name = 'lms/forget-password.html'
+
+    return render(request, template_name)
